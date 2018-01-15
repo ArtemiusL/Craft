@@ -1,0 +1,73 @@
+{#
+ # Homepage template
+ # ---------------
+ #
+ # When this template gets loaded, it will be because someone has accessed
+ # http://yoursite.com/ (without any URI). Craft checks to see if you have
+ # a Single section set to be the Homepage (as you do, by default), and
+ # loads the section’s Template (this file). A special ‘entry’ variable
+ # will already be set for you, assigned to the Homepage entry.
+ #
+ # It's worth noting that even if you didn't have a Homepage Single section,
+ # as long as this template remains at craft/templates/index.html, it
+ # would still be the one to get loaded when accessing http://yoursite.com/,
+ # albeit without an ‘entry’ variable already set for you.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+ {% extends "_layout" %}
+
+ 	{% block content %}
+ 		<h1>{{ entry.title }}</h1>
+		<!-- Slider main container -->
+ 		{% set myAsset = entry.heroImage.first() %}
+		{% if myAsset %}
+			{#<picture>
+			  <source srcset="{{ myAsset.getUrl('forFullscreen') }}" media="(min-width: 1400px)">
+			  <source srcset="{{ myAsset.getUrl('forDesktop') }}" media="(min-width: 1024px)">
+			  <source srcset="{{ myAsset.getUrl('forTablet') }}" media="(min-width: 780px)">
+			  <img srcset="{{ myAsset.getUrl('forPhone') }}" alt="…">
+			</picture> #}
+			<img srcset="{{ myAsset.getUrl('forPhone') }}" alt="…">
+		{% endif %}
+ 		
+
+ 		{{ entry.body }}
+
+		<div class="swiper-container">
+		    <!-- Additional required wrapper -->
+		    <div class="swiper-wrapper">
+		    	{% if entry.sliderPhoto|length %}
+						{% for myAsset in entry.sliderPhoto %}
+							<div class="swiper-slide"><img src="{{ myAsset.url }}" alt=""></div>
+							
+						{% endfor %}
+					{% endif %}
+		    </div>
+		    <!-- If we need pagination -->
+		    <div class="swiper-pagination"></div>
+		 
+		    <!-- If we need navigation buttons -->
+		    <div class="swiper-button-prev"></div>
+		    <div class="swiper-button-next"></div>
+		 
+		</div>
+ 	{% endblock %}
+ 	{% block sidebar %}
+ 		<div class="widget">
+ 			<h3 class="widget__headline">
+ 				{{entry.widgetHeadline}}
+ 			</h3>
+ 			{{entry.widgetBody}}
+ 		</div>
+ 	{% endblock %}
+
+{# FOOTER #}
+{% block footer %}
+	© {{now.year()}} ArtemiusK, Inc. <a href="http://craftcms.com">Craft</a>
+{% endblock %}
+
+
+

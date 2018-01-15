@@ -1,0 +1,48 @@
+{% extends "_webpack.templates/_webpack.template.wrapper" %}
+{% import 'includes/macros.twig' as myMacro %}
+
+{# HEADER #}
+{% block header %}
+	<div class="container">
+	<h1 class="site-main-title"><a href="{{ siteUrl }}">{{ siteName }}</a></h1>
+	<nav class="navigation">
+		{% if header.simpleNavigation|length %}
+			{% for row in header.simpleNavigation %}
+				<a href="{{ siteUrl }}{{ row.menuLink }}">{{ row.menuName }}</a>  
+			{% endfor %}
+		{% endif %}
+	</nav>
+	<h3>{{ header.slogan }}</h3>
+	</div>
+{% endblock %}
+
+{% block main %}
+	<div class="container">
+		<div class="flex-wrap">
+			<section class="main-content">
+				{% block content %}
+					<p>If you see me, you haven’t set your <code>{% verbatim %}{% block content %}…{% endblock %}{% endverbatim %}</code> yet.</p>
+					<p>See Twig’s <a href="http://twig.sensiolabs.org/doc/templates.html#template-inheritance">Template Inheritance</a> documentation for an explanation.</p>
+				{% endblock %}
+			</section>
+			<section class="main-sidebar">
+				{% block sidebar %}
+					sidebar
+				{% endblock %}
+			</section>
+		</div>
+	</div>
+{% endblock %}
+{# MAIN #}
+
+
+{# FOOTER #}
+{% block footer %}
+	<div class="container">
+		© {{now.year()}} GitHub, Inc.
+		Copyright {{ now.w3cDate() }} {{ craft.request.serverName | ucfirst }}. All rights reserved  •  Built with <a href="http://craftcms.com">Craft</a>
+		<p>
+			{{ footer.address }}
+		</p>
+	</div>
+{% endblock %}

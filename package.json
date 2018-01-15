@@ -1,0 +1,54 @@
+{
+  "name": "craft-webpack-project-boilerplate",
+  "version": "1.0.0",
+  "description": "MilesHerndon's Craft CMS Webpack Project Boilerplate npm dependencies",
+  "main": "index.js",
+  "scripts": {
+    "ds_store": "find . -name '.DS_Store' -type f -delete",
+    "lint": "eslint .",
+    "bs": "browser-sync start --port $npm_package_config_browser_sync_port --files public --no-open",
+    "clean": "npm run ds_store && rimraf public/build",
+    "start": "IS_BROWSER_SYNC_ENABLED=true concurrently --kill-others 'npm run watch' 'npm run bs'",
+    "watch": "npm run clean && WEBPACK_CONFIG_TYPE='watch' webpack --progress --colors",
+    "build": "npm run clean && WEBPACK_CONFIG_TYPE='build' webpack -p --progress --colors",
+    "launch": "npm run clean && WEBPACK_CONFIG_TYPE='launch' webpack -p --progress --colors"
+  },
+  "config": {
+    "browser_sync_port": 38264
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://milesdesign.git.beanstalkapp.com/craft-webpack-project-boilerplate.git"
+  },
+  "author": "MilesHerndon",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-env": "^1.2.2",
+    "browser-sync": "^2.21.0",
+    "concurrently": "^3.5.1",
+    "css-loader": "^0.27.3",
+    "eslint": "^4.14.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "favicons-webpack-plugin": "0.0.7",
+    "fs-extra": "^5.0.0",
+    "html-webpack-plugin": "^2.28.0",
+    "node-sass": "^4.5.0",
+    "postcss-loader": "^2.0.6",
+    "rimraf": "^2.6.1",
+    "robotstxt-webpack-plugin": "^1.0.1",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.14.1",
+    "webpack": "^2.2.1",
+    "webpack-merge": "^4.1.0"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "picturefill": "^3.0.2",
+    "svg4everybody": "^2.1.7",
+    "swiper": "^4.1.0"
+  }
+}

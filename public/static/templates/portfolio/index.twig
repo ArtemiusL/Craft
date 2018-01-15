@@ -1,0 +1,25 @@
+{#
+ # Portfolio index template
+ # -------------------
+ #
+ # This template is loaded whenever http://example.com/portfolio is
+ # requested, because it is located at news/index.html in your
+ # craft/templates/ folder.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layout" %}
+{% set title = "News" %}
+
+{% block main %}
+	<div class="container">
+		<h1>Моё портфолио! :)</h1>
+		{% for entry in craft.entries.section('portfolio').find() %}
+			<article>
+				<h3><a href="{{ entry.url }}">{{ entry.title }}</a></h3>
+			</article>
+		{% endfor %}
+	</div>
+{% endblock %}
