@@ -17,10 +17,29 @@
 
 {% block main %}
 	<div class="container">
+		<div>
+			<h2>ЗДесь будет тест</h2>
+			{% for entry in craft.entries.section('portfolio').limit(10) %}
+    <article>
+        <h1><a href="{{ entry.url }}">{{ entry.title }}</a></h1>
+        <a href="{{ entry.url }}">Continue reading</a>
+    </article>
+{% endfor %}
+		</div>
 	<article>
+		{% set artem = craft.entries.section('portfolio').relatedTo({
+		sourceElement: 'zdorovface'
+	}) %}
 		<h1 class="portfolio-item__title">{{ entry.title }}</h1>
 		<div>
 			{% set myAsset = entry.portfolioimage.first() %}
+				<h2>Второй тест</h2>
+					{% for entry in artem %}
+				    <article>
+				        <h1><a href="{{ entry.url }}">{{ entry.title }}</a></h1>
+				        <a href="{{ entry.url }}">Continue reading</a>
+				    </article>
+					{% endfor %}
 			{% if myAsset %}
 				<img src="{{ myAsset.url }}" alt="">
 			{% endif %}

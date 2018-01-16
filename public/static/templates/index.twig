@@ -39,10 +39,14 @@
 		<div class="swiper-container">
 		    <!-- Additional required wrapper -->
 		    <div class="swiper-wrapper">
-		    	{% if entry.sliderPhoto|length %}
-						{% for myAsset in entry.sliderPhoto %}
-							<div class="swiper-slide"><img src="{{ myAsset.url }}" alt=""></div>
-							
+		    	{% if entry.mainSlider|length %}
+						{% for block in entry.mainSlider %}
+							{% switch block.type %}
+								{% case "slide" %}
+									{% set mySlideAsset = block.slideimage.first() %}
+									<div class="swiper-slide"><a href="{{block.slidelink}}"><img srcset="{{ mySlideAsset.getUrl('forPhone') }}" alt="…"></a></div>
+								{% default %}
+							{% endswitch %}
 						{% endfor %}
 					{% endif %}
 		    </div>
